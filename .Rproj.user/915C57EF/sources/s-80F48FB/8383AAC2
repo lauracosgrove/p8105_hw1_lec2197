@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537041563604.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "414036248",
+    "id" : "8383AAC2",
+    "lastKnownWriteTime" : 1537043695,
+    "last_content_update" : 1537043695631,
+    "path" : "~/datascience1/p8105_hw1_lec2197/p8105_hw1_lec2197.Rmd",
+    "project_path" : "p8105_hw1_lec2197.Rmd",
+    "properties" : {
+        "cursorPosition" : "7,134",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
