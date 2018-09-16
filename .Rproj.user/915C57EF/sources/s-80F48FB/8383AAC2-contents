@@ -34,7 +34,7 @@ fact_vector <- factor(c("l","a","u","r","a","c","o","s","g","r"))
 I had to create the vectors first before binding them in a dataframe, because the logical vector's creation depends on the existence of the random sample vector. Now, I'm going to bind them in a dataframe.
 
 ```{r bind in tibble}
-all_data <- tibble(rand_sample, log_vector, char_vector, fact_vector)
+one_data <- tibble(rand_sample, log_vector, char_vector, fact_vector)
 ```
 
 Taking the mean will only work for some vectors. This is because the mean function requires numeric inputs or logical inputs. (For logical inputs, the function interprets as binary: i.e., `FALSE` is coded as `0` and `TRUE` is coded as `1`.)
@@ -63,4 +63,37 @@ fact_to_num_2 <- as.numeric(as.character(fact_vector))
 
 As expected, the second character vector conversion to numeric by way of a factor conversion succeeded, while a factor vector conversion to numeric by way of a character conversion failed. Our different elements did not make a difference.
 
-##Problem 2
+## Problem 2
+
+This problem focuses on plotting and the use of inline R code.
+
+Create a data frame comprised of:
+x: a random sample of size 1000 from a standard Normal distribution
+y: a random sample of size 1000 from a standard Normal distribution
+A logical vector indicating whether the x + y > 0
+A numeric vector created by coercing the above logical vector
+A factor vector created by coercing the above logical vector
+
+```{r create dataframe}
+x <- rnorm(1000)
+y <- rnorm(1000)
+ifsum <- (x + y) > 0
+num_ifsum <- as.numeric(ifsum)
+fact_ifsum <- as.factor(num_ifsum)
+two_data <- tibble(x, y, ifsum, num_ifsum, fact_ifsum)
+```
+
+The dimensions, or size, of `two_data` is `r dim(two_data)`, meaning that the dataframe is comprised of 5 vectors of length 1000. The mean of x is `r mean(two_data$x)`, the median of x is `r median(two_data$x)`, and the proportion of cases for which the logical vector is `TRUE` is `r length(which(ifsum))/length(ifsum)`.
+
+Now we can visualize the data using scatterplots. Three identical-looking plots can be made of the x vs. y data with color coding on the statement `x + y > 0` since we created a logical vector evaluating that expression, and from that logical vector numeric and factor vectors. However, ggplot will have different legend defaults when asked to mapp color on different types of variables. For logical vectors, the legend options are binary, `TRUE` and `FALSE`; factor vectors, similarly, have a binary legand with `0` and `1` as options. Numeric vectors, however, are assumed to be continuous, and so have a continuous gradient scale, even though our data only have `0` and `1` as options. 
+
+```{r create scatterplots}
+plot_logical <- ggplot(two_data, aes(x, y, color = ifsum)) + geom_point(size = 0.5)
+plot_numeric <- ggplot(two_data, aes(x, y, color = num_ifsum)) + geom_point(size = 0.5)
+plot_factor <- ggplot(two_data, aes(x, y, color = fact_ifsum)) + geom_point(size = 0.5)
+```
+
+```{r save first scatterplot}
+ggsave("plot_logical.png", plot = plot_logical)
+```
+
