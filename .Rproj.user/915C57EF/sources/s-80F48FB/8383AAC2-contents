@@ -28,10 +28,10 @@ set.seed(1)
 rand_sample <- runif(10, min = 0, max = 5)
 log_vector <- rand_sample > 2
 char_vector <- character(length = 10)
-fact_vector <- factor(log_vector)
+fact_vector <- factor(c("l","a","u","r","a","c","o","s","g","r"))
 ```
 
-I had to create the vectors first before binding them in a dataframe, because some of the vectors' creation depends on the existence of another vector. Now, I'm going to bind them in a dataframe.
+I had to create the vectors first before binding them in a dataframe, because the logical vector's creation depends on the existence of the random sample vector. Now, I'm going to bind them in a dataframe.
 
 ```{r bind in tibble}
 all_data <- tibble(rand_sample, log_vector, char_vector, fact_vector)
@@ -46,9 +46,7 @@ mean(char_vector)
 mean(fact_vector)
 ```
 
-
-In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the  as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens? In a second code chunk, convert your character variable from character to factor to numeric; similarly, convert your factor variable from factor to character to numeric. What happens?
-
+Both factor and logical vectors convert to numeric vectors without R having to coerce NAs. Factor vectors convert in terms of their levels, which are converted to the integer series starting from 1. Elements with the same level will code as the same number, but it's not an ordered conversion in terms of the first element's level being assigned `1`, and so on. Rather, it depends on the underlying data. For my example, the factors are ordered in alphabetical order. Logical vectors convert in the same way as above, i.e., the conversion functions interprets as binary where `FALSE` is coded as `0` and `TRUE` is coded as `1`.
 
 ```{r conversion, results="hide"}
 fact_to_num <- as.numeric(fact_vector)
@@ -56,10 +54,13 @@ char_to_num <- as.numeric(char_vector)
 log_to_num <- as.numeric(log_vector)
 ```
 
-## 
-
+Character vectors, on the other hand, do not convert to logical vectors without coercion of NAs. However, we can test this one more time with a different character vector than my default creation of empty characters using the `character(length = 10)` function, by first converting my factor vector to character and then to numeric. We can also test if converting the factor vector to character first, and after to numeric, will be successful.
 
 ```{r conversion take 2, results="hide"}
 char_to_num_2 <- as.numeric(as.factor(char_vector))
 fact_to_num_2 <- as.numeric(as.character(fact_vector))
 ```
+
+As expected, the second character vector conversion to numeric by way of a factor conversion succeeded, while a factor vector conversion to numeric by way of a character conversion failed. Our different elements did not make a difference.
+
+##Problem 2
