@@ -91,6 +91,9 @@ Now we can visualize the data using scatterplots. Three identical-looking plots 
 plot_logical <- ggplot(two_data, aes(x, y, color = ifsum)) + geom_point(size = 0.5)
 plot_numeric <- ggplot(two_data, aes(x, y, color = num_ifsum)) + geom_point(size = 0.5)
 plot_factor <- ggplot(two_data, aes(x, y, color = fact_ifsum)) + geom_point(size = 0.5)
+plot_logical
+plot_numeric
+plot_factor
 ```
 
 ```{r save first scatterplot}
