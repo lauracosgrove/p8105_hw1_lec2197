@@ -65,14 +65,14 @@ As expected, the second character vector conversion to numeric by way of a facto
 
 ## Problem 2
 
-This problem focuses on plotting and the use of inline R code.
 
-Create a data frame comprised of:
-x: a random sample of size 1000 from a standard Normal distribution
-y: a random sample of size 1000 from a standard Normal distribution
-A logical vector indicating whether the x + y > 0
-A numeric vector created by coercing the above logical vector
-A factor vector created by coercing the above logical vector
+I created `two_data`, a data frame comprised of:
+
+* x: a random sample of size 1000 from a standard Normal distribution
+* y: a random sample of size 1000 from a standard Normal distribution
+* A logical vector indicating whether the x + y > 0
+* A numeric vector created by coercing the above logical vector
+* A factor vector created by coercing the above logical vector
 
 ```{r create dataframe}
 x <- rnorm(1000)
@@ -85,7 +85,7 @@ two_data <- tibble(x, y, ifsum, num_ifsum, fact_ifsum)
 
 The dimensions, or size, of `two_data` is `r dim(two_data)`, meaning that the dataframe is comprised of 5 vectors of length 1000. The mean of x is `r mean(two_data$x)`, the median of x is `r median(two_data$x)`, and the proportion of cases for which the logical vector is `TRUE` is `r length(which(ifsum))/length(ifsum)`.
 
-Now we can visualize the data using scatterplots. Three identical-looking plots can be made of the x vs. y data with color coding on the statement `x + y > 0` since we created a logical vector evaluating that expression, and from that logical vector numeric and factor vectors. However, ggplot will have different legend defaults when asked to mapp color on different types of variables. For logical vectors, the legend options are binary, `TRUE` and `FALSE`; factor vectors, similarly, have a binary legand with `0` and `1` as options. Numeric vectors, however, are assumed to be continuous, and so have a continuous gradient scale, even though our data only have `0` and `1` as options. 
+Now we can visualize the data using scatterplots. Three identical-looking plots can be made of the x vs. y data with color coding on the statement `x + y > 0` since we created a logical vector evaluating that expression, and from that logical vector numeric and factor vectors. However, ggplot will have different legend defaults when asked to map color on different types of variables. For logical vectors, the legend options are binary, `TRUE` and `FALSE`; factor vectors, similarly, have a binary legand with `0` and `1` as options. Numeric vectors, however, are assumed to be continuous, and so have a continuous gradient scale, even though our data only have `0` and `1` as options. 
 
 ```{r create scatterplots}
 plot_logical <- ggplot(two_data, aes(x, y, color = ifsum)) + geom_point(size = 0.5)

@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3533969467",
+    "hash" : "0",
     "id" : "8383AAC2",
-    "lastKnownWriteTime" : 1537235850,
-    "last_content_update" : 1537235850919,
+    "lastKnownWriteTime" : 1537236099,
+    "last_content_update" : 1537236099574,
     "path" : "~/datascience1/p8105_hw1_lec2197/p8105_hw1_lec2197.Rmd",
     "project_path" : "p8105_hw1_lec2197.Rmd",
     "properties" : {
-        "cursorPosition" : "92,87",
+        "cursorPosition" : "87,661",
         "scrollLine" : "85",
         "tempName" : "Untitled1"
     },
